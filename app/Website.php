@@ -25,6 +25,6 @@ class Website extends Model
     	return $this->whereHas('meta', function($query) {
     		$query->where('meta.name', 'domain');
     		$query->where('meta.value', 'RLIKE', '.*(.com|.net)');
-    	})->with('meta');
+    	})->whereRaw('year(`created_at`) = ?', [date('Y')])->with('meta');
     }
 }
